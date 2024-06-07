@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- code in here to display a list of books-->
+<h2>Selwyn Campground - Make a booking</h2>
+<h3>Choose the date you'd like the booking to start on.</h3>
+
+<form action="{{url_for('booking')}}" method="POST">
+<label for="bookingdate">Choose start night of booking</label>
+<input type="date" min="{{currentdate}}" name="bookingdate"/>
+<label for="bookingnights">Number of nights</label>
+<input type="number" name="bookingnights" min="1" max="5" step="1" value="1"/>
+<label for="occupancy">Number of people</label>
+<input type="number" name="occupancy" min="1" max="8" step="1" value="1"/>
+
+<input type="submit"/>
+</form>
+
+{% endblock %}

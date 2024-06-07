@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- code in here to display a list of books-->
+<h2>Selwyn Campground - Make a booking</h2>
+<p>
+<form action="/booking/add" method="POST">
+<label for="bookingdate">Start Date to be booked</label>
+<input type="text" enabled="false" name="bookingdate" value="{{bookingdate}}"/>
+<br>
+<input type="hidden" name="bookingnights" value="{{bookingnights}}"/>
+<input type="hidden" name="occupancy" value="{{occupancy}}"/>
+<label for="customer">Customer to book for</label>
+<select name="customer">
+    {% for customer in customerlist %} 
+    <option value="{{customer[0]}}">{{customer[1]}} {{customer[2]}}</option>
+    {% endfor %}
+</select><br>
+<label for="site">Site to select</label><br>
+<!-- radio button loop -->
+{% for site in sitelist %}
+<input type="radio" name="site" value="{{site[0]}}"> {{site[0]}} - {{site[1]}} occupancy </input><br>
+{% endfor %}
+
+<br>
+<input type="submit"/>
+</form>
+
+{% endblock %}
