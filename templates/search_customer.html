@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+      <h2><b>{% block title %} Search Customer {% endblock %}</b></h2>
+    </div>
+    <div class="card-body">
+      <h4 class="subtitle">You Can Search By Name Email Or Phone Number.</h4>
+    </div>
+  </div>
+  <hr style="padding-bottom: 20px;">
+
+  <div class="container">
+    <h3>Input the cusotmer information below</h3>
+    <form action="{{ url_for('search_customer') }}" method="POST" class="mb-4">
+      <div class="input-group">
+        <input type="text" name="query" class="form-control" placeholder="Search '@' will list all customers">
+        <button type="submit" class="btn btn-outline-primary">Search</button>
+      </div>
+    </form>
+
+    {% if customer_list %}
+    <ul>
+
+      {% for customer in customer_list %}
+      <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <h4><b>Customer ID: <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ customer[0] }}</span></b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6><b>First Name:<br></b>{{ customer[1] }}</h6>
+            </div>
+            <div class="col-4">
+                <h6><b>Last Name:<br></b>{{ customer[2] }}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6><b>Phone Number:</b><br>{{ customer[4] }}</h6>
+            </div>
+            <div class="col-4">
+                <h6><b>Email Address:</b><br>{{ customer[3] }}</h6>
+            </div>
+        </div>
+        <br>
+        <form action="{{ url_for('delete_customer', customer_id=customer[0]) }}" method="POST" style="display:inline;">
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm" onclick="return confirm('Please Confirm that you want to delete this cusotmer')">
+          </form>
+    </div>
+
+    
+
+    <hr style="padding-bottom: 20px;">
+      {% endfor %}
+ 
+
+    </ul>
+    {% else %}
+    <h4><b class="btn btn-warning">No results found.</b><h4>
+    {% endif %}
+  </div>
+
+
+  
+
+
+  
+<hr style="padding-bottom: 20px;">
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

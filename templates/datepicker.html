@@ -1,18 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- code in here to display a list of books-->
-<h2>Selwyn Campground - Make a booking</h2>
-<h3>Choose the date you'd like the booking to start on.</h3>
+
+<div class="card">
+    <div class="card-header">
+      <h2><b>{% block title %}Make a booking{% endblock %}</b></h2>
+    </div>
+    <div class="card-body">
+      <h4 class="subtitle">Choose the date you'd like the booking to start on</h4>
+    </div>
+  </div>
+  <hr style="padding-bottom: 20px;">
+
+
 
 <form action="{{url_for('booking')}}" method="POST">
 <label for="bookingdate">Choose start night of booking</label>
-<input type="date" min="{{currentdate}}" name="bookingdate"/>
+<input  type="date" min="{{currentdate}}" name="bookingdate"/><br><br>
 <label for="bookingnights">Number of nights</label>
-<input type="number" name="bookingnights" min="1" max="5" step="1" value="1"/>
+<input  type="number" name="bookingnights" min="1" max="5" step="1" value="1"/>
 <label for="occupancy">Number of people</label>
 <input type="number" name="occupancy" min="1" max="8" step="1" value="1"/>
+<br>
+<br>
+<input class="btn btn-primary" type="submit" value="Submit">
 
-<input type="submit"/>
 </form>
 
 {% endblock %}

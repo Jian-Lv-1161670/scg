@@ -1,12 +1,61 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- code in here to display a list of books-->
-<h2>Selwyn Campground - Who is camping?</h2>
-<h3>Choose the date you'd like view who is camping.</h3>
+
+
+<div class="card">
+    <div class="card-header">
+      <h2><b>{% block title %}Who is camping?{% endblock %}</b></h2>
+    </div>
+    <div class="card-body">
+      <h4 class="subtitle">Choose the date you'd like view who is camping</h4>
+    </div>
+  </div>
+  <hr style="padding-bottom: 20px;">
+
+
 
 <form action="{{url_for('campers')}}" method="POST">
-<input type="date" value="{{currentdate}}" name="campdate"/>
-<input type="submit"/>
+<input class="form-control" type="date" value="{{currentdate}}" name="campdate"/>
+<br>
+<input class="btn btn-primary" type="submit" value="Submit">
+
 </form>
+
+<hr style="padding-bottom: 20px;">
+
+
+<h2><b>Campground Booked List</b></h2>
+<br>
+
+{% if camperlist %}
+
+    {% for camper in camperlist %}
+
+    <ul>
+    <div class="container">
+        <div class="row">
+            </b></h4>
+          <div class="col-10"><p><h4><b>Campground ID :  </b> <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ camper[1]}}</span></h4></p> </div>
+            <div class="row">
+              <div class="col-5"><h6><b>First Name : </b>{{camper[8]}}</h6></div>
+              <div class="col-5"> <h6><b>Last Name : </b> {{ camper[9]}}</h6></div>
+              <!-- Force next columns to break to new line -->
+              <div class="row"></div>
+              <div class="col-10"><h6><b>Booked Date : </b> {{ camper[3]}} </h6</div>
+              <div class="row"></div><br>
+              <div class="col-10"><h6><b>Email Address : </b> {{ camper[10]}} </h6></div>
+              <div class="row"></div>
+              <div class="col-10"><h6><b>Phone Number : </b> {{ camper[11]}} </h6></div>
+            </div>
+          </div>
+      </div>
+      <hr style="padding-bottom: 20px;">
+
+    </ul>
+
+    {% endfor %}
+
+{% endif %}
+
 
 {% endblock %}

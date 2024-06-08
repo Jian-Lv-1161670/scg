@@ -4,26 +4,76 @@
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
 
 
-    <body>
-        <nav>
-            <h1>Selwyn Campground</h1>
-            <ul>    
-                <li><a href="{{ url_for('booking') }}">Make Booking</a></li>
-            </ul>
-          </nav>
-          <section class="content">
+    <!-- <body style="background-image: url('/static/images/BG1.png'); background-size: cover;background-attachment: fixed;"> -->
+      <body style="background-color: #57659a;">
+
+          <div class="container">
             <header>
-              {% block header %}{% endblock %}
+              
             </header>
-            {% for message in get_flashed_messages() %}
-              <div class="flash">{{ message }}</div>
+
+            <div style ="background-color: rgb(245, 245, 245);" class="row">
+              <div  class="col-sm-10">  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div  class="container-fluid">
+                  
+                  <a href="{{ url_for('home') }}"> <img width="100" style="padding-right: 20px;" href="{{ url_for('home') }}" src="{{ url_for('static', filename='images/logo2.png') }}" alt="Example Image"></a>
+                  <b style="padding-right: 40px; padding-top: 10px;" class="" href="{{ url_for('home') }}"><h3><b>Selwyn <br>Campground</b></h2></b>
+                  
+
+                  
+                    
+                
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                    
+                    <div class="navbar-nav">
+                      <a class="btn btn-outline-primary me-2" href="{{ url_for('home') }}">Home</a>
+                      <a class="btn btn-outline-primary me-2" href="{{ url_for('customerlist') }}">Customer List</a>
+                      <a class="btn btn-outline-primary me-2" href="{{ url_for('booking') }}">Make Booking</a>
+                      <a class="btn btn-outline-primary me-2" href="{{url_for('campers')}}">Search By Date</a>
+
+                     
+
+                     
+                    </div>
+                   
+                  </div>
+                </div>
+              </nav></div>
+
+
+              <hr style="padding-bottom: 30px;">
+              
+              {% block header %}{% endblock %}
+
+              {% for message in get_flashed_messages() %}
+              <div class="alert alert-danger">{{ message }}</div>
             {% endfor %}
-            {% block content %}{% endblock %}
-          </section>
+
+            
+
+              <div class="container">
+                <div class="row">
+                  <div style="text-align: left; padding: 20px;" class="col">
+
+                    {% block content %}{% endblock %}
+                  
+                  
+                  </div>
+
+                  <div class="col-3"></div>
+
+
+
+
         <!-- JavaScript Bundle with Popper -->
        <script> 
         // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -48,4 +98,16 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
+
+
+    <footer style="width: 100%; height: 40px; background: #243881;">
+      
+  
+    </footer>
+  
+
+
+
+
+
 </html>

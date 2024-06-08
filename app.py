@@ -72,7 +72,7 @@ def home():
     cursor.close()
     connection.close()
 
-    return render_template("index.html", customercount=customercount, last_customer=last_customer, bookings=bookings, booking_count = booking_count)
+    return render_template("index.html", customercount=customercount, last_customer=last_customer, bookings=bookings, booking_count = booking_count, currentdate = datetime.now().date())
 
 
     

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+
+<div class="col-11">
+    <h1><b>Welcome to use Booking System</b></h1>
+    <h2><c class="fw-lighter" style="text-align: right;" > Tody is {{ currentdate }}</c></h2>
+</div>
+<hr>
+<h2>Today You have <b style="color: blueviolet;">{{booking_count}}</b> Bookings : </h2>
+<hr>
+<h2>Total Customers: {{ customercount }}</h2>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card">
+    
+        <div class="card-body">
+          <h3 class="card-title">Card title</h3>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+       
+        <div class="card-body">
+          <h3 class="card-title">Card title</h3>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        
+        <div class="card-body">
+          <h3 class="card-title">Card title</h3>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+      
+        <div class="card-body">
+          <h3 class="card-title">Card title</h3>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to addihis co little bit longer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<hr>
+{% for booking in bookings %}
+<div class="container">
+    <div class="row">
+        <div class="col-11">
+            <h4><b>Camp ID   : <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ booking[1] }}</span></b></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <h6><b>Order ID:<br></b>{{ booking[0] }}</h6>
+        </div>
+        <div class="col-3">
+            <h6><b>Cusotmer ID:<br></b>{{ booking[2] }}</h6>
+        </div>
+    </div>
+</div>
+<hr style="padding-bottom: 0px;">
+{% endfor %}
+
+
+<hr>
+<h2><b>Latest Customer</b></h2>
+<br>
+{% if last_customer %}
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <h4><b>Customer ID: <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ last_customer[0] }}</span></b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6><b>First Name:<br></b>{{ last_customer[1] }}</h6>
+            </div>
+            <div class="col-4">
+                <h6><b>Last Name:<br></b>{{ last_customer[2] }}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6><b>Phone Number:</b><br>{{ last_customer[4] }}</h6>
+            </div>
+            <div class="col-4">
+                <h6><b>Email Address:</b><br>{{ last_customer[3] }}</h6>
+            </div>
+        </div>
+        <br>
+    </div>
+    <hr style="padding-bottom: 20px;">
+{% else %}
+    <p>No customer found.</p>
+{% endif %}
+
+
+{% endblock %}

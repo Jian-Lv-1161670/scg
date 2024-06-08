@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="card">
+    <div class="card-header">
+      <h2><b>{% block title %} Add New Customer {% endblock %}</b></h2>
+    </div>
+    <div class="card-body">
+      <h4 class="subtitle">You Can Insert New Customer Into System</h4>
+    </div>
+  </div>
+  <hr style="padding-bottom: 20px;">
+
+
+
+<form action="{{ url_for('new_customer') }}" method="post">
+    <div class="form-group">
+        <label for="firstname"><h3>First Name</h3></label>
+        <input type="text" name="firstname" placeholder="First Name" class="form-control" value="{{ request.form['firstname'] }}">
+    </div>
+    <br>
+    
+
+    <div class="form-group">
+        <label for="familyname"><h3>Family Name</h3></label>
+        <input type="text" name="familyname" placeholder="Family Name" class="form-control" value="{{ request.form['familyname'] }}">
+    </div><br>
+
+    <div class="form-group">
+        <label for="email"><h3>Email</h3></label>
+        <input type="text" name="email" placeholder="Email" class="form-control" value="{{ request.form['email'] }}">
+    </div><br>
+
+    <div class="form-group">
+        <label for="phone"><h3>Phone</h3></label>
+        <input type="text" name="phone" placeholder="Phone" class="form-control" value="{{ request.form['phone'] }}">
+    </div><br>
+
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2><b>{% block title %}Customer List{% endblock %}</b></h2>
+  </div>
+  <div class="card-body">
+    <h4 class="subtitle">You can view all customers' information in this list</h4>
+  </div>
+</div>
+<hr style="padding-bottom: 0px;">
+<a class="btn btn-warning" href="{{ url_for('new_customer') }}">Add New</a>
+<a class="btn btn-success" href="{{ url_for('search_customer') }}">Search</a>
+<hr>
+
+{% for customer in customerlist %}
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <h4><b>Customer ID: <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ customer[0] }}</span></b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6><b>First Name:<br></b>{{ customer[1] }}</h6>
+            </div>
+            <div class="col-4">
+                <h6><b>Last Name:<br></b>{{ customer[2] }}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h6><b>Phone Number:</b><br>{{ customer[4] }}</h6>
+            </div>
+            <div class="col-4">
+                <h6><b>Email Address:</b><br>{{ customer[3] }}</h6>
+            </div>
+        </div>
+    </div>
+    <hr style="padding-bottom: 20px;">
+{% endfor %}
+
+{% endblock %}
