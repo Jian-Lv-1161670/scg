@@ -159,30 +159,7 @@ def makebooking():
 
     # Redirect back to the form if there is an error
     return redirect(url_for('booking'))
-
-def is_booking_overlapping(site, booking_date, booking_nights):
-    # 
-    lastNight = booking_date + timedelta(days=booking_nights)
-    
-    # 
-    connection = getCursor1()
-    cursor = connection.cursor()
-    cursor.execute("""
-        SELECT COUNT(*) FROM bookings
-        WHERE site = %s
-        AND booking_date <= %s
-        AND booking_date + INTERVAL booking_nights DAY >= %s
-    """, (site, lastNight, booking_date))
-    overlapping_count = cursor.fetchone()[0]
-    
-    cursor.close()
-    connection.close()
-    
-    # 
-    return overlapping_count > 0
-    
-
-        
+            
 
 
 @app.route("/customer")
@@ -281,7 +258,7 @@ def delete_customer(customer_id):
     cursor.close()
     connection.close()
 
-    flash('删除成功！', 'success')
+    flash('Delete Successfully！', 'success')
 
     return redirect(url_for('search_customer'))
     
