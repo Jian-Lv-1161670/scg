@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if customer_report %}
+<div class="card">
+    <div class="card-header">
+      <h2><b>Customer Report</b></h2>
+    </div>
+    <div class="card-body">
+      <h4 class="subtitle">You can view customers report in this page</h4>
+    </div>
+  </div>
+
+  <hr>
+  <div class="container">
+    <div class="row">
+        <div class="col-5">
+            <h4><b>Customer ID: <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{customer_report[0][2]}}</span></b></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h6><b>First Name:<br></b>{{customer_report[0][8]}}</h6>
+        </div>
+        <div class="col-4">
+            <h6><b>Last Name:<br></b>{{customer_report[0][9]}}</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h6><b>Phone Number:</b><br>{{customer_report[0][11]}}</h6>
+        </div>
+        <div class="col-4">
+            <h6><b>Email Address:</b><br>{{customer_report[0][10]}}</h6>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-4">
+            <h4><b>Total Bookings:</b><br><span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{total_bookings}}</span></h4>
+        </div>
+        <div class="col-4">
+            <h4><b>Total Occupancy:</b><br><span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{total_occupancy}}</span></h4>
+        </div>
+        <div class="col-4">
+            <h4><b>Average Occupancy:</b><br><span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{average_occupancy}}</span></h4>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+<p>No report available for this customer. if you want this cusomters details, you may use the search page <a class="btn btn-success" href="{{ url_for('search_customer') }}">Search</a> </p>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

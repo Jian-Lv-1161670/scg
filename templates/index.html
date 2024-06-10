@@ -6,13 +6,8 @@
     <h2><c class="fw-lighter" style="text-align: right;" > Tody is {{ currentdate }}</c></h2>
 </div>
 <hr>
-<h3>Today You have <b style="color: blueviolet;">{{booking_count}}</b> Bookings</h3>
-
-<h3>Total Customers: {{ customercount }}</h3>
+<h3>Total Customers:  <b style="color: blueviolet;">{{ customercount }}</b> Bookings</h3>
 <hr>
-
-
-
 <h2><b>Dash Board</b></h2>
 <br>
 <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -86,30 +81,6 @@
 {% else %}
     <p>No customer found.</p>
 {% endif %}
-
-
-<hr>
-<h2><b>Today's Booking</b></h2>
-
-{% if last_customer %}<br>
-{% for booking in bookings %}
-<div class="container">
-    <div class="row">
-        <div class="col-5">
-            <h4><b>Site ID : <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ booking[1] }}</span></b><h6><b>Order ID:<br></b>{{ booking[0] }}</h6></h4>
-        </div>
-    </div>
-</div>
-<hr>
-{% endfor %}
-{% else %}
-    <p>No Booking found.</p>
-{% endif %}
-
-
-
-
-
 {% endblock %}
 
 

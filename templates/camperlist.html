@@ -5,7 +5,7 @@
     <h2><b>{% block title %}Booking List{% endblock %}</b></h2>
   </div>
   <div class="card-body">
-    <h4 class="subtitle">camperlist order by Latest Order ID</h4>
+    <h4 class="subtitle">Camperlist order by latest order ID</h4>
   </div>
 </div>
 <!-- <hr style="padding-bottom: 0px;">
@@ -22,7 +22,6 @@
 
 
 {% for campers in camperlist %}
-
 
 <div class="container">
     <div class="row">
@@ -44,18 +43,18 @@
     <br>
     <div class="row">
         <div class="col-4">
-            <h6><b>First Name:<br></b>{{campers[9]}}</h6>
+            <h6><b>First Name:<br></b>{{campers[8]}}</h6>
         </div>
         <div class="col-4">
-            <h6><b>Last Name:<br></b>{{campers[10]}}</h6>
+            <h6><b>Last Name:<br></b>{{campers[9]}}</h6>
         </div>
     </div>
     <div class="row">
         <div class="col-4">
-            <h6><b>Phone Number:</b><br>{{ campers[12] }}</h6>
+            <h6><b>Phone Number:</b><br>{{ campers[11] }}</h6>
         </div>
         <div class="col-4">
-            <h6><b>Email Address:</b><br>{{ campers[11] }}</h6>
+            <h6><b>Email Address:</b><br>{{ campers[10] }}</h6>
         </div>          
 
     </div>
