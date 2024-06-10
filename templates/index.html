@@ -6,15 +6,14 @@
     <h2><c class="fw-lighter" style="text-align: right;" > Tody is {{ currentdate }}</c></h2>
 </div>
 <hr>
-<h2>Today You have <b style="color: blueviolet;">{{booking_count}}</b> Bookings : </h2>
+<h3>Today You have <b style="color: blueviolet;">{{booking_count}}</b> Bookings</h3>
+
+<h3>Total Customers: {{ customercount }}</h3>
 <hr>
-<h2>Total Customers: {{ customercount }}</h2>
-<hr>
 
 
 
-
-<h2>Dash Board</h2>
+<h2><b>Dash Board</b></h2>
 <br>
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col">
@@ -55,25 +54,7 @@
     </div>
   </div>
 <hr>
-{% for booking in bookings %}
-<div class="container">
-    <div class="row">
-        <div class="col-11">
-            <h4><b>Camp ID   : <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ booking[1] }}</span></b></h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <h6><b>Order ID:<br></b>{{ booking[0] }}</h6>
-        </div>
-        <div class="col-3">
-            <h6><b>Cusotmer ID:<br></b>{{ booking[2] }}</h6>
-        </div>
-    </div>
-</div>
-<hr style="padding-bottom: 0px;">
-{% endfor %}
-<hr>
+
 <h2><b>Latest Customer</b></h2>
 <br>
 {% if last_customer %}
@@ -105,4 +86,30 @@
 {% else %}
     <p>No customer found.</p>
 {% endif %}
+
+
+<hr>
+<h2><b>Today's Booking</b></h2>
+
+{% if last_customer %}<br>
+{% for booking in bookings %}
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <h4><b>Site ID : <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{ booking[1] }}</span></b><h6><b>Order ID:<br></b>{{ booking[0] }}</h6></h4>
+        </div>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% else %}
+    <p>No Booking found.</p>
+{% endif %}
+
+
+
+
+
 {% endblock %}
+
+

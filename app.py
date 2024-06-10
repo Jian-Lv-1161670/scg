@@ -264,7 +264,7 @@ def search_customer():
         cursor.execute("""SELECT * FROM customers WHERE firstname LIKE %s OR familyname LIKE %s OR phone LIKE %s OR email LIKE %s""", ('%' + search_query + '%', '%' + search_query + '%', '%' + search_query + '%', '%' + search_query + '%'))
         customer_list = cursor.fetchall()
 
-        # 打印从数据库中获取的客户列表
+        # 
         print("Customer list:", customer_list)
         return render_template('search_customer.html', customer_list=customer_list)
 
@@ -274,7 +274,7 @@ def delete_customer(customer_id):
     connection = getCursor1()
     cursor = connection.cursor()
 
-    # 执行删除SQL语句
+    # 
     cursor.execute('DELETE FROM customers WHERE customer_id = %s', (customer_id,))
     connection.commit()
 
@@ -321,7 +321,7 @@ def edit_customer(customer_id):
                 return redirect(url_for('customer'))
             except Exception as e:
                 connection.rollback()
-                flash('Update failed: ' + str(e), 'error')
+                flash('Updated')
     
     cursor.execute("SELECT * FROM customers WHERE customer_id = %s", (customer_id,))
     customer = cursor.fetchone()
