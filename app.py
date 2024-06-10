@@ -35,18 +35,12 @@ def getCursor1():
     return connection
 
 def validate_email(email):
-    """
-    
-    """
     email_regex = re.compile(
         r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
     )
     return re.match(email_regex, email) is not None
 
 def validate_phone(phone):
-    """
-    
-    """
     nz_phone_regex = re.compile(
         r"^(?:\+64|0)?(?:[2345789]\d{7,9})$"
     )
@@ -111,28 +105,24 @@ def campers():
 @app.route("/booking", methods=['GET','POST'])
 def booking():
     if request.method == "GET":
-        return render_template("datepicker.html", currentdate = datetime.now().date())
+        return render_template("datepicker.html", currentdate=datetime.now().date())
     else:
         bookingNights = request.form.get('bookingnights')
         bookingDate = request.form.get('bookingdate')
         occupancy = request.form.get('occupancy')
         firstNight = date.fromisoformat(bookingDate)
+        lastNight = firstNight + timedelta(days=int(bookingNights) - 1)
 
-        lastNight = firstNight + timedelta(days=int(bookingNights))
         connection = getCursor()
         connection.execute("SELECT * FROM customers;")
         customerList = connection.fetchall()
-        connection.execute("select * from sites where occupancy >= %s AND site_id not in (select site from bookings where booking_date between %s AND %s);",(occupancy,firstNight,lastNight))
+        connection.execute("SELECT * FROM sites WHERE occupancy >= %s AND site_id NOT IN (SELECT site FROM bookings WHERE booking_date BETWEEN %s AND %s);", (occupancy, firstNight, lastNight))
         siteList = connection.fetchall()
         
         print(f"Received form data - bookingNights: {bookingNights}, bookingDate: {bookingDate}, occupancy: {occupancy}")
-        return render_template("bookingform.html", customerlist = customerList, bookingdate=bookingDate, sitelist = siteList, bookingnights = bookingNights, occupancy = occupancy)    
-
-
+        return render_template("bookingform.html", customerlist=customerList, bookingdate=bookingDate, sitelist=siteList, bookingnights=bookingNights, occupancy=occupancy)
 
 @app.route("/booking/add", methods=['POST'])
-
-
 def makebooking():
     bookingNights = request.form.get('bookingnights')
     bookingDate = request.form.get('bookingdate')
@@ -154,17 +144,22 @@ def makebooking():
     elif not customer:
         flash('Please select a customer!')
     else:
-        firstNight = date.fromisoformat(bookingDate)
-        print(f"Inserting: bookingNights={bookingNights}, bookingDate={bookingDate}, occupancy={occupancy}, site={site}, customer={customer}")
         connection = getCursor1()
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO bookings (site, customer, booking_date, occupancy, booking_night) VALUES (%s, %s, %s, %s, %s)", (site, customer, firstNight, occupancy, bookingNights))
+        
+        firstNight = date.fromisoformat(bookingDate)
+        nights = int(bookingNights)
+        for i in range(nights):
+            booking_date = firstNight + timedelta(days=i)
+            print(f"Inserting: site={site}, customer={customer}, booking_date={booking_date}, occupancy={occupancy}, bookingNights={bookingNights}")
+            cursor.execute("INSERT INTO bookings (site, customer, booking_date, occupancy) VALUES (%s, %s, %s, %s)", (site, customer, booking_date, occupancy))
+
         connection.commit()
         print("Booking successful")
 
         cursor.close()
         connection.close()
-        flash('Booking successful !', 'success')
+        flash('Booking successful!', 'success')
         return redirect(url_for('camperlist'))
 
     # Redirect back to the form if there is an error
@@ -323,7 +318,55 @@ def edit_customer(customer_id):
 
     return render_template('edit_customer.html', customer=customer)
     
+
+@app.route('/customer/<int:customer_id>/report', methods=['GET', 'POST'])
+def customer_report(customer_id):
+    connection = getCursor1()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM bookings JOIN sites ON site = site_id INNER JOIN customers ON customer = customer_id WHERE customer_id = %s;", (customer_id,))
+    customer_report = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT COUNT(bookings.booking_id) AS total_bookings
+        FROM bookings
+        JOIN sites ON site = site_id
+        INNER JOIN customers ON customer = customer_id
+        WHERE customer_id = %s;
+    """, (customer_id,))
+    total_bookings_result = cursor.fetchone()
+    total_bookings = total_bookings_result[0] if total_bookings_result else 0
+
+    if total_bookings > 0:
+        cursor.execute("""
+            SELECT SUM(bookings.occupancy) AS total_occupancy
+            FROM bookings
+            JOIN sites ON site = site_id
+            INNER JOIN customers ON customer = customer_id
+            WHERE customer_id = %s;
+        """, (customer_id,))
+        total_occupancy_result = cursor.fetchone()
+        total_occupancy = total_occupancy_result[0] if total_occupancy_result else 0
+        average_occupancy = total_occupancy / total_bookings
+    else:
+        total_occupancy = 0
+        average_occupancy = 0
+
+    print("Total bookings for customer", customer_id, ":", total_bookings)
+    print("Total occupancy for customer", customer_id, ":", total_occupancy)
+    print("Average occupancy for customer", customer_id, ":", average_occupancy)
+
+    print(customer_report)
+    return render_template("customer_report.html", customer_report=customer_report, total_bookings=total_bookings, average_occupancy=average_occupancy, total_occupancy=total_occupancy)
+
+
+        
+
     
+    
+
+
+
+
     
 if __name__ == "__main__":
     app.run(debug=True)
