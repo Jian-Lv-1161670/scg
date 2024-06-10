@@ -14,21 +14,17 @@
 
 
 
-<form action="{{url_for('campers')}}" method="POST">
-<input class="form-control" type="date" value="{{currentdate}}" name="campdate"/>
-<br>
-<input class="btn btn-primary" type="submit" value="Submit">
-
+  <form action="{{ url_for('campers') }}" method="POST">
+    <input class="form-control" type="date" value="{{ currentdate }}" name="campdate"/>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 
 <hr style="padding-bottom: 20px;">
 
 
-<h2><b>Campground Booked List</b></h2>
 <br>
-
 {% if camperlist %}
-
     {% for camper in camperlist %}
 
     <ul>
@@ -52,10 +48,6 @@
       <hr style="padding-bottom: 20px;">
 
     </ul>
-
     {% endfor %}
-
 {% endif %}
-
-
 {% endblock %}

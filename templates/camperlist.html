@@ -1,9 +1,79 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2><b>{% block title %}Booking List{% endblock %}</b></h2>
+  </div>
+  <div class="card-body">
+    <h4 class="subtitle">camperlist order by Latest Order ID</h4>
+  </div>
+</div>
+<!-- <hr style="padding-bottom: 0px;">
+<a class="btn btn-warning" href="{{ url_for('new_customer') }}">Add New</a>
+<a class="btn btn-success" href="{{ url_for('search_customer') }}">Search</a>
+<hr> -->
 
-<!-- Insert code to loop over the list of campers and display them -->
 
-  
+<hr style="padding-bottom: 0px;">
+<!-- <a class="btn btn-warning" href="{{ url_for('new_customer') }}">Add New</a> -->
+<a class="btn btn-success" href="{{ url_for('booking') }}">Add New Booking</a>
+<a class="btn btn-success" href="{{ url_for('campers') }}">Search by date</a>
+<hr>
 
 
+{% for campers in camperlist %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h4><b>Order ID: <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{campers[0]}}</span></b>&nbsp;&nbsp;
+                <b>Site ID: <span class="badge bg-primary text-wrap" style="width: 6rem; padding-left: 10px;">{{campers[1]}}</span></b></h4>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+ <h4><b>Booking Date: <span class="" style="width: 10rem; padding-left: 10px;">{{campers[3]}}</span></h4>
+        </div>
+</div>
+
+    </div>
+    <div class="col-6">
+        <h4><b>Occupancy: <span class="" style="width: 6rem; padding-left: 10px;">{{campers[4]}}</span></b>&nbsp;&nbsp;
+            <b>Booked nights: <span class="" style="width: 6rem; padding-left: 10px;">{{campers[5]}}</span></b></h4>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            <h6><b>First Name:<br></b>{{campers[9]}}</h6>
+        </div>
+        <div class="col-4">
+            <h6><b>Last Name:<br></b>{{campers[10]}}</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h6><b>Phone Number:</b><br>{{ campers[12] }}</h6>
+        </div>
+        <div class="col-4">
+            <h6><b>Email Address:</b><br>{{ campers[11] }}</h6>
+        </div>          
+
+    </div>
+    <hr style="padding-bottom: 20px;">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endfor %}
 {% endblock %}

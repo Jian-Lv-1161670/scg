@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2><b>Edit Customer Information</b></h2>
+    </div>
+    <div class="card-body">
+        <h4 class="subtitle">Update Customer Details Below</h4>
+    </div>
+</div>
+<hr style="padding-bottom: 20px;">
+
+<form action="{{ url_for('edit_customer', customer_id=customer[0]) }}" method="post">
+    <div class="form-group">
+        <label for="firstname"><h3>First Name</h3></label>
+        <input type="text" name="firstname" placeholder="First Name" class="form-control" value="{{ customer[1] }}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="familyname"><h3>Family Name</h3></label>
+        <input type="text" name="familyname" placeholder="Family Name" class="form-control" value="{{ customer[2] }}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="email"><h3>Email</h3></label>
+        <input type="text" name="email" placeholder="Email" class="form-control" value="{{ customer[3] }}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="phone"><h3>Phone</h3></label>
+        <input type="text" name="phone" placeholder="Phone" class="form-control" value="{{ customer[4] }}">
+    </div>
+    <br>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+</form>
+{% endblock %}

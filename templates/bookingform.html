@@ -1,40 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- code in here to display a list of books-->
 
 <div class="card">
     <div class="card-header">
-        <h2><b>{% block title %}Make a booking - 2{% endblock %}</b></h2>
+        <h2><b>{% block title %}Make a Booking{% endblock %}</b></h2>
     </div>
     <div class="card-body">
-      <h4 class="subtitle">Choose the date you'd like view who is camping</h4>
+        <h4 class="subtitle">Make a booking by select Cusotmer and Site</h4>
     </div>
-  </div>
-  <hr style="padding-bottom: 20px;">
+</div>
+<hr style="padding-bottom: 20px;">
 
-
-
-<form action="/booking/add" method="POST">
-<label for="bookingdate">1, Start Date to be booked</label>
-<input type="text" enabled="false" name="bookingdate" value="{{bookingdate}}"/>
-<br><br>
-<input  type="hidden" name="bookingnights" value="{{bookingnights}}"/>
-<input  type="hidden" name="occupancy" value="{{occupancy}}"/>
-<label for="customer">2, Customer to book for</label>
-<select name="customer">
-    {% for customer in customerlist %} 
-    <option value="{{customer[0]}}">{{customer[1]}} {{customer[2]}}</option>
-    {% endfor %}
-</select><br><br>
-<label for="site">3, Site to select</label><br>
-<!-- radio button loop -->
-{% for site in sitelist %}
-<input class="form-check-input" type="radio" name="site" value="{{site[0]}}"> {{site[0]}} - {{site[1]}} occupancy </input><br>
-{% endfor %}
-
-<br>
-<input class="btn btn-primary" type="submit" value="Submit">
-
+<form action="{{ url_for('makebooking') }}" method="POST">
+  <label for="bookingdate">1, Start Date to be booked</label>
+  <input type="text" readonly name="bookingdate" value="{{ bookingdate }}"/>
+  <br><br>
+  <input type="hidden" name="bookingnights" value="{{ bookingnights }}"/>
+  <input type="hidden" name="occupancy" value="{{ occupancy }}"/>
+  <label for="customer">2, Customer to book for</label>
+  <select name="customer" required>
+      {% for customer in customerlist %} 
+      <option value="{{ customer[0] }}">{{ customer[1] }} {{ customer[2] }}</option>
+      {% endfor %}
+  </select><br><br>
+  <label for="site">3, Site to select</label><br>
+  {% for site in sitelist %}
+  <input class="form-check-input" type="radio" name="site" value="{{ site[0] }}" required> {{ site[0] }} - {{ site[1] }} occupancy</input><br>
+  {% endfor %}
+  <br>
+  <input class="btn btn-primary" type="submit" value="submit">
 </form>
 
 {% endblock %}

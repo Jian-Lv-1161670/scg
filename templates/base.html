@@ -37,10 +37,9 @@
                     <div class="navbar-nav">
                       <a class="btn btn-outline-primary me-2" href="{{ url_for('home') }}">Home</a>
                       <a class="btn btn-outline-primary me-2" href="{{ url_for('customerlist') }}">Customer List</a>
+                      <a class="btn btn-outline-primary me-2" href="{{ url_for('new_customer') }}">New Customer</a>
+                      <a class="btn btn-outline-primary me-2" href="{{url_for('camperlist')}}">Booking List</a>
                       <a class="btn btn-outline-primary me-2" href="{{ url_for('booking') }}">Make Booking</a>
-                      <a class="btn btn-outline-primary me-2" href="{{url_for('campers')}}">Search By Date</a>
-
-                     
 
                      
                     </div>
@@ -55,7 +54,7 @@
               {% block header %}{% endblock %}
 
               {% for message in get_flashed_messages() %}
-              <div class="alert alert-danger">{{ message }}</div>
+              <div class="alert alert-warning">{{ message }}</div>
             {% endfor %}
 
             

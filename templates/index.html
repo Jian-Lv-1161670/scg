@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
-
-
-
+{% block title %}Selwyn Campground Booking System{% endblock %}
 {% block content %}
-
-
-
 <div class="col-11">
     <h1><b>Welcome to use Booking System</b></h1>
     <h2><c class="fw-lighter" style="text-align: right;" > Tody is {{ currentdate }}</c></h2>
@@ -14,14 +9,20 @@
 <h2>Today You have <b style="color: blueviolet;">{{booking_count}}</b> Bookings : </h2>
 <hr>
 <h2>Total Customers: {{ customercount }}</h2>
+<hr>
 
+
+
+
+<h2>Dash Board</h2>
+<br>
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col">
       <div class="card">
     
         <div class="card-body">
-          <h3 class="card-title">Card title</h3>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <h3 class="card-title"><a style="text-decoration: none;" class="" href="{{ url_for('customerlist') }}">Customer List</a></h3>
+          <p class="card-text">You can view all customer in the system, Add new cusotmer, Search and Edit Cusotmer's info</p>
         </div>
       </div>
     </div>
@@ -29,8 +30,8 @@
       <div class="card">
        
         <div class="card-body">
-          <h3 class="card-title">Card title</h3>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <h3 class="card-title"><a style="text-decoration: none;" class="" href="{{ url_for('camperlist') }}">Booking List</a></h3>
+          <p class="card-text">You can view all booking in the system, Add new booking, Search booking info by date</p>
         </div>
       </div>
     </div>
@@ -38,8 +39,8 @@
       <div class="card">
         
         <div class="card-body">
-          <h3 class="card-title">Card title</h3>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+          <h3 class="card-title"><a style="text-decoration: none;" class="" href="{{ url_for('new_customer') }}">Add New Customer</a></h3>
+          <p class="card-text"></p>
         </div>
       </div>
     </div>
@@ -47,15 +48,12 @@
       <div class="card">
       
         <div class="card-body">
-          <h3 class="card-title">Card title</h3>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to addihis co little bit longer.</p>
+          <h3 class="card-title"><a style="text-decoration: none;"  href="{{ url_for('booking') }}">Make New Booking</a></h3>
+          <p class="card-text"></p>
         </div>
       </div>
     </div>
   </div>
-
-
-
 <hr>
 {% for booking in bookings %}
 <div class="container">
@@ -75,8 +73,6 @@
 </div>
 <hr style="padding-bottom: 0px;">
 {% endfor %}
-
-
 <hr>
 <h2><b>Latest Customer</b></h2>
 <br>
@@ -109,6 +105,4 @@
 {% else %}
     <p>No customer found.</p>
 {% endif %}
-
-
 {% endblock %}
