@@ -35,12 +35,22 @@ def getCursor1():
     return connection
 
 def validate_email(email):
-    # 
-    return '@' in email
+    """
+    
+    """
+    email_regex = re.compile(
+        r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+    )
+    return re.match(email_regex, email) is not None
 
 def validate_phone(phone):
-    # 
-    return len(phone) >= 8 and len(phone) <= 15 and phone.isdigit()
+    """
+    
+    """
+    nz_phone_regex = re.compile(
+        r"^(?:\+64|0)?(?:[2345789]\d{7,9})$"
+    )
+    return re.match(nz_phone_regex, phone) is not None
 
 
 @app.route("/")
@@ -251,14 +261,19 @@ def delete_customer(customer_id):
     connection = getCursor1()
     cursor = connection.cursor()
 
-    # 
-    cursor.execute('DELETE FROM customers WHERE customer_id = %s', (customer_id,))
-    connection.commit()
+    try:
+        # 
+        cursor.execute('DELETE FROM customers WHERE customer_id = %s', (customer_id,))
+        connection.commit()
+        flash('Delete Successfully!', 'success')
 
-    cursor.close()
-    connection.close()
+    except Exception as e:
+        connection.rollback()
+        flash("Error occurred: This customer already made booking, please do not delete this cusotmer!")
 
-    flash('Delete Successfully！', 'success')
+    finally:
+        cursor.close()
+        connection.close()
 
     return redirect(url_for('search_customer'))
     
