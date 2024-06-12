@@ -35,8 +35,8 @@ I opted for a RESTful routing structure to organize our application's endpoints 
 - **Simple Interface:** Keep the interface simple, avoiding excessive elements and complicated operations.
 
 - **Consistent Design:** Use consistent fonts, colors, and layout styles to make it easier for users to become familiar with and use the system.
-- **Examples:**  Integrate buttons for "Reports," "Delete," and "Edit" on both the user list and user search pages. This facilitates users' 
- - **Reason:** intuitive access to the desired pages and actions, enhancing overall usability.
+- **Examples:**  Integrate buttons for "Reports," "Delete," and "Edit" on both the user list and user search pages.
+ - **Reason:**  This facilitates users' intuitive access to the desired pages and actions, enhancing overall usability.
 
 
 #### Templates
