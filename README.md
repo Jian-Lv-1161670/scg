@@ -123,6 +123,11 @@ To enable customers to make their own bookings, the following changes would be n
 - Foreign key linking to the `users` table to track which user made the booking.
 
 
+#### Image Source:
+
+The logo used in this web app is a custom design created by myself using Photoshop. It is stored in the file `logo2.png`, located in the `static/image` directory of the project. The purpose of incorporating this logo is to add a touch of vibrancy and liveliness to the overall interface.
+  
+![Logo](static/image/logo2.png)
 
 
 
